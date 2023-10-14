@@ -167,7 +167,7 @@ exports.getFeaturedPost = async (req, res) => {
 }
 
 exports.getPosts = async (req, res) => {
-    const { pageNo = 0, limit = 10 } = req.query;
+    const { pageNo = 0, limit = 9 } = req.query;
     const posts = await Post.find({}).sort({ createdAt: -1 })
         .skip(parseInt(pageNo) * parseInt(limit))
         .limit(parseInt(limit));
@@ -200,6 +200,8 @@ exports.searchPost = async (req, res) => {
             slug: post.slug,
             thumbnail: post.thumbnail?.url,
             author: post.author,
+            createdAt: post.createdAt,
+            tags: post.tags
         }))
     });
 }

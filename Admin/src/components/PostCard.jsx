@@ -4,9 +4,11 @@ import { BsPencilSquare, BsTrash } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, onDeleteClick }) {
     if (!post) return null;
     const { title, thumbnail, tags, meta, createdAt, slug } = post;
+
+
     return (
         <div className='bg-white shadow-sm p-2 rounded flex flex-col'>
             <img className="aspect-video" src={thumbnail || "./nothumbnail.jpg"} alt={title} />
@@ -26,7 +28,10 @@ export default function PostCard({ post }) {
                         <BsPencilSquare />
                     </Link>
                     <button className=' w-8 h-8 rounded-full flex justify-center items-center 
-                     bg-red-400 hover:bg-red-500 text-white'>
+                     bg-red-400 hover:bg-red-500 text-white'
+                        onClick={onDeleteClick}
+
+                    >
                         <BsTrash />
                     </button>
                 </div>

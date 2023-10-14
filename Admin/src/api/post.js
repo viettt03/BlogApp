@@ -14,3 +14,32 @@ export const getPosts = async (pageNo, limit) => {
     }
 
 }
+export const deletePost = async (postId) => {
+    try {
+        const { data } = await client.delete(`/post/${postId}`);
+        return data;
+    } catch (error) {
+        const { response } = error;
+        if (response?.data) {
+            return response.data;
+        }
+        return { error: error || error.message }
+
+    }
+
+}
+
+export const searchPost = async (query) => {
+    try {
+        const { data } = await client(`/post/search?title=${query}`);
+        return data;
+    } catch (error) {
+        const { response } = error;
+        if (response?.data) {
+            return response.data;
+        }
+        return { error: error || error.message }
+
+    }
+
+}
